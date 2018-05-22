@@ -1,0 +1,17 @@
+[
+    {
+      "id":"mac",
+      "price": 8000,
+      "description": "MacBook Air 13 2017"
+    },
+    {
+        "id":"phone",
+        "price": 3000,
+        "description": "Samsung Galaxy S6 Edge"
+    },
+    {
+        "id":"bike",
+        "price": 10000,
+        "description": "Cube Reaction Pro 29"
+    }
+]
