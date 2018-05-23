@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        svg{
+            width: 100vw;
+        }
+        polyline{
+            fill: none;
+            stroke: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="graph">
+       <svg>
+            <polyline></polyline>
+       </svg> 
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", getData);
+        let polyline = document.querySelector("polyline");
+        let myJson;
+        let ages = [];
+        let array2=ages;
+        let indexes = [];
+        let final=[];
+
+        
+        Array.prototype.insert = function ( index, item ) {
+                 this.splice( index, 0, item );
+            };
+
+        async function getData(){
+            //load JSON
+            const jsonData = await fetch("persons.json");
+            myJson = await jsonData.json();
+
+
+             myJson.forEach(function(data){
+                ages.push(data.age)
+             })
+             drawGraph();
+             polyline.setAttribute("points", pointsArray(2));
+
+             return ages;
+        }
+
+        function drawGraph(){
+            console.log("should draw graph");
+            //build graph
+            console.log(ages);
+
+            for(let i=0; i<ages.length; i++){
+                final.push(i*10, myJson[i].age);
+            }
+            console.log(final)
+        }
+
+        console.log(final)
+
+        function pointsArray(chunkSize){
+            let pointsInPairs = [];
+            for (let i=0; i<final.length; i+=chunkSize){
+                pointsInPairs.push(final.slice(i,i+chunkSize));
+            }
+            return pointsInPairs;
+        }
+
+ 
+    </script>
+</body>
+</html>
