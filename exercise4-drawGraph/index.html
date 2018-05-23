@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #svg-container{
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        polyline{
+            fill: none;
+            stroke: #333;
+            stroke-dasharray: 467;
+            stroke-dashoffset: 467;            
+            transition: all 2s ease;
+        }
+
+        #click-me{
+            padding: 2em;
+        }
+
+        button{
+            width: 20%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="click-me">
+        <button>Click here to draw the graph</button>
+    </div>
+    <div id="svg-container">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- <polyline points="0,40 10,40 20,10 30,50 40,30 55,50 65,43 73,60 80,10 87,50 93,42 100,42"></polyline> -->
+            <polyline></polyline>
+        </svg>
+    </div>
+    <script>
+        let points = [0, 40, 10, 40, 20, 10, 30, 50, 40, 30, 55, 50, 60, 43, 73, 60, 80, 10, 87, 50, 93, 42, 100, 42];
+        let polyline = document.querySelector("polyline");
+        
+        function pointsArray(chunkSize){
+            let pointsInPairs = [];
+            for (let i=0; i<points.length; i+=chunkSize){
+                pointsInPairs.push(points.slice(i,i+chunkSize));
+            }
+            return pointsInPairs;
+        }
+
+        polyline.setAttribute("points", pointsArray(2));
+        console.log(document.querySelector("polyline"))
+
+        document.querySelector("button").addEventListener("click", animate);
+        function animate(){
+            document.querySelector("polyline").style.strokeDashoffset = 0;
+            console.log("It animates")
+        }
+
+</script>
+</body>
+</html>
