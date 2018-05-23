@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #circle{
+            width: 50%;
+        }
+
+        svg{
+            background-color: #999;
+            transform: rotate(-90deg);
+            border-radius: 50%;
+        }
+
+        #c1{
+            fill: none;
+            stroke: red;
+            stroke-width: 100;
+            stroke-dasharray: 0 314; 
+            transition: all 2s ease;
+ 
+        }
+        
+        #c2{
+            fill: none;
+            stroke: pink;
+            stroke-width: 100;
+            stroke-dasharray: 0 314;
+            stroke-dashoffset: 0;
+            transition: all 2s ease;
+
+        }
+        
+        #c3{
+            fill: none;
+            stroke: lightblue;
+            stroke-width: 100;
+            stroke-dasharray: 0 314;             
+            stroke-dashoffset: 0;
+            transition: all 2s ease;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="circle">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle id="c1" cx="50" cy="50" r="50"/>
+            <circle id="c2" cx="50" cy="50" r="50"/>
+            <circle id="c3" cx="50" cy="50" r="50"/>
+          </svg>
+    </div>
+    <div id="info">
+    </div>
+
+    <script>
+        let jsonData;
+        let myJson;
+
+        document.addEventListener("DOMContentLoaded", getData);
+
+        async function getData(data){
+            //load JSON
+            jsonData = await fetch("data.json");
+            myJson = await jsonData.json();
+
+            myJson.forEach(function(data){
+                const element = document.querySelector(`#${data.id}`);
+                element.style.strokeDasharray = data.strokeDasharray;
+                element.style.strokeDashoffset = data.strokeDashoffset;
+
+                element.addEventListener("mouseover", function(){
+                    document.querySelector("#info").textContent = data.description;
+                })
+            }
+)
+        }
+
+    </script>
+</body>
+</html>

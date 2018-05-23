@@ -1,0 +1,20 @@
+[
+    {
+      "id":"c1",
+      "strokeDasharray":"20 314",
+      "strokeDashoffset":0,
+      "description": "First slice"
+    },
+    {
+      "id":"c2",
+      "strokeDasharray": "50 314",
+      "strokeDashoffset":-10,
+      "description": "Second slice"
+    },
+    {
+      "id":"c3",
+      "strokeDasharray": "60 314",
+      "strokeDashoffset":-40,
+      "description": "Third slice"
+    }
+  ]
