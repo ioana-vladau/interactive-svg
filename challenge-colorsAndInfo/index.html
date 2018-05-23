@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .color-on-hover{
+        fill: pink;
+    }
+</style>
+<body>
+    
+<div id="info"></div>
+<div id="map"></div>
+
+<!-- <script src="main.js"></script> -->
+
+<script>
+    let fillColor;
+    let areaId;
+    let newColor = "#ca1";
+    let myJson;
+    document.addEventListener("DOMContentLoaded", getData);
+
+    async function getData(){
+    //load the SVG
+    const svgData = await fetch("map.svg");
+    const mySvg = await svgData.text();
+
+    //show SVG in DOM
+    document.querySelector("#map").innerHTML = mySvg;
+
+    //load JSON
+    const jsonData = await fetch("data.json");
+    myJson = await jsonData.json();
+
+    //change color on mouseover
+    document.querySelector("svg").addEventListener("mouseover", changeColor);
+    document.querySelector("svg").addEventListener("mouseout", originalColor);
+    }
+
+    //change color on mouseover
+    function changeColor(){
+        
+        //what have I hovered?
+        let area = event.target;
+        areaId = area.id;
+        let id = area.parentElement.id;
+        fillColor = area.getAttribute("fill");
+        // console.log(fillColor);
+        document.querySelector(`#${areaId}`).setAttribute("fill", newColor)
+    
+        myJson.forEach(element => {
+            //see if there is a match between city and id
+            if(element.city === id){
+                console.log(`This city is: ${element.city}`)
+                document.querySelector("#info").textContent = `This city is: ${element.city}`;
+            }
+        })
+    }
+
+    //change color back on mouseout
+    function originalColor(){
+        document.querySelector(`#${areaId}`).setAttribute("fill", fillColor)
+    }
+</script>
+
+</body>
+</html>
